@@ -32,6 +32,18 @@ exports.LoginController = (req, res) => {
   }
 };
 
+exports.RegisterController = (req, res) => {
+  if (req.cookies.didlogin == "true") {
+    res.redirect("/");
+  } else {
+    res.layout("register", {
+      layout: "layout",
+      title: "Register",
+      error: "",
+    });
+  }
+};
+
 exports.logoutController = (req, res) => {
   res.cookie("didlogin", "false");
   res.redirect("/");
