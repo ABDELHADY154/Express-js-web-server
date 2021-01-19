@@ -12,11 +12,7 @@ exports.LandingPageController = (req, res) => {
     res.redirect("/home");
   } else {
     res.cookie("didlogin", "false");
-    res.layout("login", {
-      layout: "layout",
-      title: "Login",
-      error: "",
-    });
+    res.redirect("/login");
   }
 };
 
@@ -25,7 +21,7 @@ exports.LoginController = (req, res) => {
     res.redirect("/");
   } else {
     res.layout("login", {
-      layout: "layout",
+      layout: "index",
       title: "Login",
       error: "",
     });
@@ -37,7 +33,7 @@ exports.RegisterController = (req, res) => {
     res.redirect("/");
   } else {
     res.layout("register", {
-      layout: "layout",
+      layout: "index",
       title: "Register",
       error: "",
     });

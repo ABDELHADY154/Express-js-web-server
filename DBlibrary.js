@@ -25,7 +25,7 @@ db.createDBIfNotExists = function (databaseName) {
     },
   );
   con.query(
-    "CREATE TABLE IF NOT EXISTS pharmacy.users (id INT PRIMARY KEY, name VARCHAR(255), email VARCHAR(255), password VARCHAR(255))",
+    "CREATE TABLE IF NOT EXISTS pharmacy.users (id INT AUTO_INCREMENT PRIMARY KEY , name VARCHAR(255), email VARCHAR(255), password VARCHAR(255))",
     function (err, result) {
       if (!err) console.log("users table created");
     },
