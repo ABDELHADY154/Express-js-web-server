@@ -12,7 +12,12 @@
 <div class="container mt-5">
   <div class="card text-center">
     <div class="card-header"></div>
-    <div class="card-body"></div>
+    <div class="card-body">
+      <% if (user) { %>
+      <h5 class="card-title">Welcome <%= user.full_name %></h5>
+      <p>Your email is: <%= user.email %></p>
+      <% } %>
+    </div>
     <div class="card-footer text-muted"></div>
   </div>
 </div>

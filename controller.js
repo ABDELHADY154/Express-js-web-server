@@ -16,10 +16,15 @@ exports.LandingPageController = (req, res) => {
 };
 exports.HomeController = (req, res) => {
   if (req.cookies.didlogin == "true") {
-    res.layout("home", {
-      layout: "index",
-      title: "Home",
-      error: "",
+    fs.readFile("users.json", function (err, data) {
+      if (err) return console.log(err);
+      if (data) {
+        res.layout("home", {
+          layout: "index",
+          title: "Home",
+          user: JSON.parse(data),
+        });
+      }
     });
   } else {
     res.redirect("/");
