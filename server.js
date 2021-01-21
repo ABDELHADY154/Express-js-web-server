@@ -11,13 +11,25 @@ app.use(require("ejs-yield"));
 app.get("/", function (req, res) {
   controller.LandingPageController(req, res);
 });
+app.get("/pharmacy", function (req, res) {
+  controller.HomeController(req, res);
+});
 app.get("/login", function (req, res) {
   controller.LoginController(req, res);
 });
 app.get("/register", function (req, res) {
   controller.RegisterController(req, res);
 });
+app.post("/registerUser", bodyParser, function (req, res) {
+  controller.RegisterFormController(req, res);
+});
+app.post("/loginUser", bodyParser, function (req, res) {
+  controller.LoginFormController(req, res);
+});
 
+app.get("/logout", function (req, res) {
+  controller.logoutController(req, res);
+});
 // fallback route
 app.get("*", function (req, res) {
   res.send("page not found");
