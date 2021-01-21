@@ -7,7 +7,7 @@
     <h6 class="text-danger text-center"><%= error %></h6>
     <% } %>
     <div class="card-body">
-      <form method="POST" action="/loginForm">
+      <form method="POST" action="/loginUser">
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label"
             >Email address</label
@@ -32,7 +32,6 @@
         <button type="submit" class="btn btn-primary">Login</button>
         <div class="float-end">
           <a href="/register" class="btn btn-success">Register</a>
-          <a href="/" class="btn btn-danger"> Back To Home </a>
         </div>
       </form>
     </div>
