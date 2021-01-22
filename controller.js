@@ -1,3 +1,5 @@
+/** @format */
+
 var express = require("express");
 var app = express();
 var fs = require("fs");
@@ -162,5 +164,23 @@ exports.createCustomer = (req, res) => {
 };
 exports.createCustomerForm = (req, res) => {
   db.createCustomer(req.body);
+  res.redirect("/pharmacy/customers");
+};
+
+exports.editCustomer = (req, res) => {
+  if (req.cookies.didlogin == "true") {
+    db.getCustomer(req.params.id, function (data) {
+      res.layout("customer/edit", {
+        layout: "index",
+        title: data.full_name,
+        customer: data,
+      });
+    });
+  }
+};
+exports.editCustomerForm = (req, res) => {
+  console.log(req.params.id);
+  db.updateCustomer(req.body, req.params.id);
+
   res.redirect("/pharmacy/customers");
 };
