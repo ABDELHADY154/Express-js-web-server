@@ -24,19 +24,19 @@ db.createDBIfNotExists = function (databaseName) {
     "CREATE DATABASE IF NOT EXISTS " + databaseName,
     function (err, result) {
       if (!err) console.log("database created");
-    }
+    },
   );
   con.query(
     "CREATE TABLE IF NOT EXISTS pharmacy.users (id INT AUTO_INCREMENT PRIMARY KEY , full_name VARCHAR(255), email VARCHAR(255), password VARCHAR(255))",
     function (err, result) {
       if (!err) console.log("users table created");
-    }
+    },
   );
   con.query(
     "CREATE TABLE IF NOT EXISTS pharmacy.customers (id INT AUTO_INCREMENT PRIMARY KEY , full_name VARCHAR(255), email VARCHAR(255), phone_num VARCHAR(15))",
     function (err, result) {
       if (!err) console.log("customers table created");
-    }
+    },
   );
 };
 
@@ -55,7 +55,7 @@ db.registerUser = function (data, userData) {
           }
         });
       }
-    }
+    },
   );
 };
 db.loginUser = function (data, user) {
@@ -75,10 +75,39 @@ db.getAllCustomer = function (customers) {
     }
   });
 };
+
+db.getCustomer = function (id, getData) {
+  var q = "SELECT * FROM pharmacy.customers WHERE id=?";
+  con.query(q, [id], function (err, result) {
+    if (!err) {
+      getData(result[0]);
+    }
+  });
+};
+
+db.deleteCustomer = function (id) {
+  var q = "DELETE FROM pharmacy.customers WHERE id=?";
+  con.query(q, [id], function (err, result) {
+    if (!err) {
+      console.log(result);
+    }
+  });
+};
+
 db.createCustomer = function (data) {
   var q =
     "INSERT INTO pharmacy.customers (full_name,email,phone_num) VALUES (?,?,?)";
-  con.query(q, [data.full_name, data.email, data.phone_num]);
+  con.query(
+    q,
+    [data.full_name, data.email, data.phone_num],
+    function (err, result) {
+      if (!err) {
+        console.log(result);
+      } else {
+        console.log(err);
+      }
+    },
+  );
 };
 
 module.exports = db;

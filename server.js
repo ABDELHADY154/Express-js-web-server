@@ -33,11 +33,20 @@ app.get("/logout", function (req, res) {
   controller.logoutController(req, res);
 });
 
-app.get("/customers", function (req, res) {
+app.get("/pharmacy/customers", function (req, res) {
   controller.CustomersController(req, res);
 });
-app.get("/customers/create", function (req, res) {
+app.get("/pharmacy/customers/show/:id", function (req, res) {
+  controller.CustomersShowController(req, res);
+});
+app.get("/pharmacy/customers/delete/:id", function (req, res) {
+  controller.CustomersDelete(req, res);
+});
+app.get("/pharmacy/customers/create", function (req, res) {
   controller.createCustomer(req, res);
+});
+app.post("/pharmacy/customers/createForm", bodyParser, function (req, res) {
+  controller.createCustomerForm(req, res);
 });
 // fallback route
 app.get("*", function (req, res) {

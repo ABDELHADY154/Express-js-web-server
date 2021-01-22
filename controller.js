@@ -1,5 +1,3 @@
-/** @format */
-
 var express = require("express");
 var app = express();
 var fs = require("fs");
@@ -129,18 +127,40 @@ exports.CustomersController = (req, res) => {
         customers: data,
       });
     });
+  } else {
+    res.redirect("/");
   }
 };
-
+exports.CustomersShowController = (req, res) => {
+  if (req.cookies.didlogin == "true") {
+    db.getCustomer(req.params.id, function (data) {
+      res.layout("customer/show", {
+        layout: "index",
+        title: data.full_name,
+        customer: data,
+      });
+    });
+  } else {
+    res.redirect("/");
+  }
+};
+exports.CustomersDelete = (req, res) => {
+  if (req.cookies.didlogin == "true") {
+    db.deleteCustomer(req.params.id);
+    res.redirect("/pharmacy/customers");
+  } else {
+    res.redirect("/");
+  }
+};
 exports.createCustomer = (req, res) => {
   if (req.cookies.didlogin == "true") {
-    db.createCustomer(function (data) {
-      res.layout("customer/edit", {
-        layout: "index",
-        title: "customer create",
-        customers: data,
-      });
+    res.layout("customer/create", {
+      layout: "index",
+      title: "create",
     });
   }
 };
-exports.createCustomer;
+exports.createCustomerForm = (req, res) => {
+  db.createCustomer(req.body);
+  res.redirect("/pharmacy/customers");
+};
