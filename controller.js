@@ -1,3 +1,4 @@
+
 var express = require("express");
 var app = express();
 var fs = require("fs");
@@ -36,7 +37,7 @@ exports.LoginController = (req, res) => {
     res.redirect("/");
   } else {
     res.layout("login", {
-      layout: "index",
+      layout: "authIndex",
       title: "Login",
       error: "",
     });
@@ -48,7 +49,7 @@ exports.RegisterController = (req, res) => {
     res.redirect("/");
   } else {
     res.layout("register", {
-      layout: "index",
+      layout: "authIndex",
       title: "Register",
       error: "",
     });
@@ -73,7 +74,7 @@ exports.RegisterFormController = (req, res) => {
     res.redirect("/pharmacy");
   } else {
     res.layout("register", {
-      layout: "index",
+      layout: "authIndex",
       title: "Register",
       error: "enter a valid data",
     });
@@ -95,7 +96,7 @@ exports.LoginFormController = (req, res) => {
         res.redirect("/pharmacy");
       } else {
         res.layout("login", {
-          layout: "index",
+          layout: "authIndex",
           title: "Login",
           error: "wrong email or password",
         });
@@ -103,7 +104,7 @@ exports.LoginFormController = (req, res) => {
     });
   } else {
     res.layout("login", {
-      layout: "index",
+      layout: "authIndex",
       title: "login",
       error: "enter a valid data",
     });
@@ -117,4 +118,16 @@ exports.logoutController = (req, res) => {
     if (err) return console.log(err);
   });
   res.redirect("/");
+};
+
+exports.CustomersController = (req, res) => {
+  if (req.cookies.didlogin == "true") {
+    db.getAllCustomer(function (data) {
+      res.layout("customer/index", {
+        layout: "index",
+        title: "customer",
+        customers: data,
+      });
+    });
+  }
 };

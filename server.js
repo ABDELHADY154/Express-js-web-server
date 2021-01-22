@@ -30,6 +30,10 @@ app.post("/loginUser", bodyParser, function (req, res) {
 app.get("/logout", function (req, res) {
   controller.logoutController(req, res);
 });
+
+app.get("/customers", function (req, res) {
+  controller.CustomersController(req, res);
+});
 // fallback route
 app.get("*", function (req, res) {
   res.send("page not found");
