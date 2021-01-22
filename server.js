@@ -1,3 +1,5 @@
+/** @format */
+
 var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
@@ -33,6 +35,9 @@ app.get("/logout", function (req, res) {
 
 app.get("/customers", function (req, res) {
   controller.CustomersController(req, res);
+});
+app.get("/customers/create", function (req, res) {
+  controller.createCustomer(req, res);
 });
 // fallback route
 app.get("*", function (req, res) {

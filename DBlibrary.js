@@ -75,23 +75,10 @@ db.getAllCustomer = function (customers) {
     }
   });
 };
-db.createCustomer = function (data, userData) {
+db.createCustomer = function (data) {
   var q =
     "INSERT INTO pharmacy.customers (full_name,email,phone_num) VALUES (?,?,?)";
-  con.query(
-    q,
-    [data.full_name, data.email, data.phone_num],
-    function (err, result) {
-      if (!err) {
-        var q = "SELECT * FROM pharmacy.users WHERE email=? AND phone_num=?";
-        con.query(q, [data.email, data.phone_num], function (err, result) {
-          if (!err) {
-            userData(result[0]);
-          }
-        });
-      }
-    }
-  );
+  con.query(q, [data.full_name, data.email, data.phone_num]);
 };
 
 module.exports = db;

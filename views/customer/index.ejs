@@ -9,17 +9,19 @@
       <th scope="col">Phone</th>
       <th scope="col">Options</th>
       <th scope="col">
-        <button type="button" class="btn btn-info">create</button>
+        <a type="button" class="btn btn-info" href="/customers/create"
+          >create</a
+        >
       </th>
     </tr>
   </thead>
   <tbody>
-    <% customers.forEach(function(user){ %>
+    <% customers.forEach(function(customers){ %>
     <tr>
-      <th scope="row"><%= user.id %></th>
-      <td><%= user.full_name %></td>
-      <td><%= user.email %></td>
-      <td><%= user.phone_num %></td>
+      <th scope="row"><%= customers.id %></th>
+      <td><%= customers.full_name %></td>
+      <td><%= customers.email %></td>
+      <td><%= customers.phone_num %></td>
       <td>
         <div class="btn-group" role="group" aria-label="Basic example">
           <button type="button" class="btn btn-secondary">Update</button>

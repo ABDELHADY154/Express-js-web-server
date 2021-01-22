@@ -1,3 +1,4 @@
+/** @format */
 
 var express = require("express");
 var app = express();
@@ -119,7 +120,6 @@ exports.logoutController = (req, res) => {
   });
   res.redirect("/");
 };
-
 exports.CustomersController = (req, res) => {
   if (req.cookies.didlogin == "true") {
     db.getAllCustomer(function (data) {
@@ -131,3 +131,16 @@ exports.CustomersController = (req, res) => {
     });
   }
 };
+
+exports.createCustomer = (req, res) => {
+  if (req.cookies.didlogin == "true") {
+    db.createCustomer(function (data) {
+      res.layout("customer/edit", {
+        layout: "index",
+        title: "customer create",
+        customers: data,
+      });
+    });
+  }
+};
+exports.createCustomer;
