@@ -5,19 +5,19 @@
     <div class="card-header d-flex justify-content-center">
       <h5 class="card-title">Welcome to Pharmacy</h5>
     </div>
-    <% if (error) { %>
-    <h6 class="text-danger text-center"><%= error %></h6>
-    <% } %>
+
     <div class="card-body">
-      <form method="POST" action="/registerUser">
+      <form method="POST" action="/customers/create">
         <div class="mb-3">
-          <label for="fullName" class="form-label">Full Name</label>
+          <label for="fullName" class="form-label">name</label>
+        
           <input
             type="text"
             class="form-control"
             id="fullName"
             name="fullName"
-          />
+          >
+          </input>
         </div>
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label"
@@ -31,18 +31,17 @@
           />
         </div>
         <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <label for="exampleInputPassword1" class="form-label">Phone</label>
           <input
-            type="password"
+            type="number"
             class="form-control"
             id="exampleInputPassword1"
             name="password"
           />
         </div>
 
-        <button type="submit" class="btn btn-primary">Register</button>
+        <button type="submit" class="btn btn-primary">Create</button>
         <div class="float-end">
-          <a href="/login" class="btn btn-success">Login</a>
         </div>
       </form>
     </div>
