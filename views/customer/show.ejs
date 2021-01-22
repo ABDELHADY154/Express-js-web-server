@@ -1,0 +1,16 @@
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header">
+      <a href="/pharmacy/customers" class="btn btn-info">Go back</a>
+    </div>
+    <div class="card-body">
+      <% if (customer) { %>
+      <ul>
+        <li><h2>Full name: <%= customer.full_name %></h2></li>
+        <li><h2>Email: <%= customer.email %></h2></li>
+        <li><h2>Phone Number: <%= customer.phone_num %></h2></li>
+      </ul>
+      <% } %>
+    </div>
+  </div>
+</div>
