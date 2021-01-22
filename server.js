@@ -48,6 +48,13 @@ app.get("/pharmacy/customers/create", function (req, res) {
 app.post("/pharmacy/customers/createForm", bodyParser, function (req, res) {
   controller.createCustomerForm(req, res);
 });
+app.get("/pharmacy/customers/edit/:id", function (req, res) {
+  controller.editCustomer(req, res);
+});
+app.post("/pharmacy/customers/editForm/:id", bodyParser, function (req, res) {
+  controller.editCustomerForm(req, res);
+});
+
 // fallback route
 app.get("*", function (req, res) {
   res.send("page not found");
