@@ -1,5 +1,3 @@
-/** @format */
-
 var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
@@ -53,6 +51,28 @@ app.get("/pharmacy/customers/edit/:id", function (req, res) {
 });
 app.post("/pharmacy/customers/editForm/:id", bodyParser, function (req, res) {
   controller.editCustomerForm(req, res);
+});
+
+app.get("/pharmacy/suppliers", function (req, res) {
+  controller.SupplierController(req, res);
+});
+app.get("/pharmacy/suppliers/show/:id", function (req, res) {
+  controller.SupplierShowController(req, res);
+});
+app.get("/pharmacy/suppliers/delete/:id", function (req, res) {
+  controller.SupplierDelete(req, res);
+});
+app.get("/pharmacy/suppliers/create", function (req, res) {
+  controller.CreateSupplier(req, res);
+});
+app.post("/pharmacy/suppliers/createForm", bodyParser, function (req, res) {
+  controller.CreateSupplierForm(req, res);
+});
+app.get("/pharmacy/suppliers/edit/:id", function (req, res) {
+  controller.editSupplier(req, res);
+});
+app.post("/pharmacy/suppliers/editForm/:id", bodyParser, function (req, res) {
+  controller.editSupplierForm(req, res);
 });
 
 // fallback route

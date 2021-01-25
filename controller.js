@@ -1,9 +1,7 @@
-/** @format */
-
 var express = require("express");
 var app = express();
 var fs = require("fs");
-var db = require("./DBlibrary.js");
+var db = require("./myDb.js");
 var cookieParser = require("cookie-parser");
 app.use(cookieParser());
 db.connect(function () {
@@ -181,6 +179,68 @@ exports.editCustomer = (req, res) => {
 exports.editCustomerForm = (req, res) => {
   console.log(req.params.id);
   db.updateCustomer(req.body, req.params.id);
-
   res.redirect("/pharmacy/customers");
+};
+exports.SupplierController = (req, res) => {
+  if (req.cookies.didlogin == "true") {
+    db.getAllSuppliers(function (data) {
+      res.layout("supplier/index", {
+        layout: "index",
+        title: "supplier",
+        suppliers: data,
+      });
+    });
+  } else {
+    res.redirect("/");
+  }
+};
+exports.SupplierShowController = (req, res) => {
+  if (req.cookies.didlogin == "true") {
+    db.getSupplier(req.params.id, function (data) {
+      res.layout("supplier/show", {
+        layout: "index",
+        title: data.full_name,
+        supplier: data,
+      });
+    });
+  } else {
+    res.redirect("/");
+  }
+};
+exports.SupplierDelete = (req, res) => {
+  if (req.cookies.didlogin == "true") {
+    db.deleteSupplier(req.params.id);
+    res.redirect("/pharmacy/suppliers");
+  } else {
+    res.redirect("/");
+  }
+};
+exports.CreateSupplier = (req, res) => {
+  if (req.cookies.didlogin == "true") {
+    res.layout("supplier/create", {
+      layout: "index",
+      title: "create",
+    });
+  }
+};
+exports.CreateSupplierForm = (req, res) => {
+  db.createSupplier(req.body);
+  res.redirect("/pharmacy/suppliers");
+};
+
+exports.editSupplier = (req, res) => {
+  if (req.cookies.didlogin == "true") {
+    db.getSupplier(req.params.id, function (data) {
+      res.layout("supplier/edit", {
+        layout: "index",
+        title: data.full_name,
+        supplier: data,
+      });
+    });
+  }
+};
+exports.editSupplierForm = (req, res) => {
+  console.log(req.params.id);
+  db.UpdateSupplier(req.body, req.params.id);
+  res.redirect("/pharmacy/suppliers");
 };
