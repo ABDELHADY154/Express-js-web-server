@@ -1,3 +1,5 @@
+/** @format */
+
 var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
@@ -75,6 +77,9 @@ app.post("/pharmacy/suppliers/editForm/:id", bodyParser, function (req, res) {
   controller.editSupplierForm(req, res);
 });
 
+app.get("/pharmacy/items", function (req, res) {
+  controller.ItemController(req, res);
+});
 // fallback route
 app.get("*", function (req, res) {
   res.send("page not found");

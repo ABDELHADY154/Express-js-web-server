@@ -1,3 +1,5 @@
+/** @format */
+
 var express = require("express");
 var app = express();
 var fs = require("fs");
@@ -240,7 +242,20 @@ exports.editSupplier = (req, res) => {
   }
 };
 exports.editSupplierForm = (req, res) => {
-  console.log(req.params.id);
   db.UpdateSupplier(req.body, req.params.id);
   res.redirect("/pharmacy/suppliers");
+};
+
+exports.ItemController = (req, res) => {
+  if (req.cookies.didlogin == "true") {
+    db.getAllItems(function (data) {
+      res.layout("items/index", {
+        layout: "index",
+        title: "Items",
+        items: data,
+      });
+    });
+  } else {
+    res.redirect("/");
+  }
 };
