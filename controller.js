@@ -257,3 +257,53 @@ exports.ItemController = (req, res) => {
     res.redirect("/");
   }
 };
+exports.ItemShowController = (req, res) => {
+  if (req.cookies.didlogin == "true") {
+    db.getItems(req.params.id, function (data) {
+      res.layout("items/show", {
+        layout: "index",
+        title: "Item",
+        item: data,
+      });
+    });
+  } else {
+    res.redirect("/");
+  }
+};
+exports.CreateItems = (req, res) => {
+  if (req.cookies.didlogin == "true") {
+    res.layout("items/create", {
+      layout: "index",
+      title: "create",
+    });
+  }
+};
+exports.CreateItemsForm = (req, res) => {
+  db.createItems(req.body);
+  res.redirect("/pharmacy/items");
+};
+
+exports.editItems = (req, res) => {
+  if (req.cookies.didlogin == "true") {
+    db.getItems(req.params.id, function (data) {
+      res.layout("items/edit", {
+        layout: "index",
+        title: "Update",
+        items: data,
+      });
+    });
+  }
+};
+exports.editItemsForm = (req, res) => {
+  db.UpdateItems(req.body, req.params.id);
+  res.redirect("/pharmacy/items");
+};
+
+exports.ItemsDelete = (req, res) => {
+  if (req.cookies.didlogin == "true") {
+    db.deleteItems(req.params.id);
+    res.redirect("/pharmacy/items");
+  } else {
+    res.redirect("/");
+  }
+};

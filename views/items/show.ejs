@@ -1,0 +1,35 @@
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            <a class="btn btn-primary" href="/pharmacy/items/create">create</a>
+        </div>
+        <h1>Items</h1>
+
+        <div class="card-body text-center container-fluid d-flex">
+
+            <% if (item) { %>
+                <ul>
+                    <li>
+                        <h2>ID: <%= item.id %>
+                        </h2>
+                    </li>
+
+                    <li>
+                        <h2>Name: <%= item.item_name %>
+                        </h2>
+                    </li>
+                    <li>
+                        <h2>Price: <%= item.item_price %>
+                        </h2>
+                    </li>
+                    <li>
+                        <h2>Quntitny: <%= item.item_quntitny %>
+                        </h2>
+                    </li>
+                    <img src="<%= item.item_url %>" class="card-img-top " style="height :300px; width :400px">
+
+                </ul>
+                <% } %>
+        </div>
+    </div>
+</div>

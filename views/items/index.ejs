@@ -1,45 +1,31 @@
 <div class="container mt-5">
   <div class="card">
     <div class="card-header">
-      <a class="btn btn-primary" href="/pharmacy/customers/create">create</a>
+      <a class="btn btn-primary" href="/pharmacy/items/create">create</a>
     </div>
-    <div class="card-body text-center">
-      <h1>Items</h1>
-      <table class="table table-dark table-striped">
-        <thead>
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Price</th>
-            <th scope="col">Quntitiy</th>
-            <th scope="col">catagory_id</th>
-          </tr>
-        </thead>
-        <tbody>
-          <% items.forEach(function(items){ %>
-            <tr>
-              <th scope="row">
-                <%= items.id %>
-              </th>
-              <th scope="row">
-                <%= items.item_name %>
-              </th>
-              <th scope="row">
-                <%= items.item_price %>
-              </th>
-              <th scope="row">
-                <%= items.item_quntitny %>
-              </th>
-              <th scope="row">
-                <%= items.catagory_id %>
-              </th>
-              <td>
-                <div></div>
-              </td>
-            </tr>
-            <% }); %>
-        </tbody>
-      </table>
+    <h1>Items</h1>
+
+    <div class="card-body text-center container-fluid d-flex">
+      <% items.forEach(function(items){ %>
+
+        <div class="card col-3  mx-auto">
+          <img src="<%= items.item_url %>" class="card-img-top " style="height :300px;">
+          <div class="card-body">
+            <h5 class="card-title">
+              <%= items.item_name %>
+
+            </h5>
+            <p class="card-text"> in stock <%= items.item_quntitny %>
+            </p>
+            <a href="/pharmacy/items/show/<%= items.id %> " class="btn btn-primary">price <%= items.item_price %>
+            </a>
+            <a href="/pharmacy/items/delete/<%= items.id %> " class="btn btn-danger">Delete
+            </a>
+            <a class="btn btn-info mr-3" href="/pharmacy/items/edit/<%= items.id %> ">update</a>
+          </div>
+        </div>
+        <% }); %>
+
     </div>
   </div>
 </div>

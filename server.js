@@ -78,6 +78,27 @@ app.post("/pharmacy/suppliers/editForm/:id", bodyParser, function (req, res) {
 app.get("/pharmacy/items", function (req, res) {
   controller.ItemController(req, res);
 });
+app.get("/pharmacy/items/show/:id", function (req, res) {
+  controller.ItemShowController(req, res);
+});
+app.get("/pharmacy/items/create", function (req, res) {
+  controller.CreateItems(req, res);
+});
+app.post("/pharmacy/items/createForm", bodyParser, function (req, res) {
+  controller.CreateItemsForm(req, res);
+});
+
+app.get("/pharmacy/items/edit/:id", function (req, res) {
+  controller.editItems(req, res);
+});
+app.post("/pharmacy/items/editForm/:id", bodyParser, function (req, res) {
+  controller.editItemsForm(req, res);
+});
+
+app.get("/pharmacy/items/delete/:id", function (req, res) {
+  controller.ItemsDelete(req, res);
+});
+
 // fallback route
 app.get("*", function (req, res) {
   res.send("page not found");

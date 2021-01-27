@@ -41,7 +41,7 @@ db.createDBIfNotExists = function (databaseName) {
   );
 
   con.query(
-    "CREATE TABLE IF NOT EXISTS pharmacy.items (id INT AUTO_INCREMENT PRIMARY KEY ,item_name  VARCHAR(255), item_price  VARCHAR(255), item_quntitny VARCHAR(255),catagory_id VARCHAR(255) ,  FOREIGN KEY (catagory_id) REFERENCES pharmacy.catagory(id)    )",
+    "CREATE TABLE IF NOT EXISTS pharmacy.items (id INT AUTO_INCREMENT PRIMARY KEY ,item_name  VARCHAR(255), item_price  VARCHAR(255), item_quntitny VARCHAR(255),item_url VARCHAR(255)    )",
     function (err, result) {
       if (!err) console.log("items table created");
     }
@@ -183,4 +183,51 @@ db.getAllItems = function (items) {
     }
   });
 };
+
+db.getItems = function (id, getData) {
+  var q = "SELECT * FROM pharmacy.items WHERE id=?";
+  con.query(q, [id], function (err, result) {
+    if (!err) {
+      getData(result[0]);
+      console.log(result[0]);
+    }
+  });
+};
+
+db.createItems = function (data) {
+  var q =
+    "INSERT INTO pharmacy.items (item_name,item_price,item_quntitny,item_url) VALUES (?,?,?,?)";
+  con.query(
+    q,
+    [data.item_name, data.item_price, data.item_quntitny, data.item_url],
+    function (err, result) {
+      if (err) {
+        console.log(err);
+      }
+    }
+  );
+};
+
+db.UpdateItems = function (data, id) {
+  var q =
+    "UPDATE pharmacy.items SET id=?,item_name=?,item_price=?,item_quntitny=?,item_url=? WHERE id=?";
+  con.query(
+    q,
+    [id, data.item_name, data.item_price, data.item_quntitny, data.item_url, id],
+    function (err, result) {
+      if (!err) {
+        console.log(result);
+      }
+    }
+  );
+};
+db.deleteItems = function (id) {
+  var q = "DELETE FROM pharmacy.items WHERE id=?";
+  con.query(q, [id], function (err, result) {
+    if (err) {
+      console.log(err);
+    }
+  });
+};
+
 module.exports = db;
