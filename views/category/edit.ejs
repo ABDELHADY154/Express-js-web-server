@@ -1,0 +1,33 @@
+<div class="container mt-5 w-50">
+    <div class="card">
+        <div class="card-header d-flex justify-content-center">
+            <h5 class="card-title">Update Category</h5>
+        </div>
+
+        <div class="card-body">
+            <form method="POST" action="/pharmacy/category/editForm/<%= category.id %> ">
+                <div class="mb-3">
+                    <label for="exampleInputName" class="form-label">category name</label
+        >
+        <input
+          type="text"
+          class="form-control"
+          id="exampleInputEmail1"
+          name="name"
+          value="<%= category.name %>"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">category description</label>
+
+                    <textarea class="form-control" name="description" placeholder="<%= category.description %>"></textarea>
+
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-info">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

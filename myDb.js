@@ -189,9 +189,53 @@ db.getAllCategory = function(category) {
     con.query(q, function(err, result) {
         if (!err) {
             category(result);
+
+        }
+    });
+};
+db.getCategory = function(id, getData) {
+    var q = "SELECT * FROM pharmacy.category  WHERE id=?";
+    con.query(q, [id], function(err, result) {
+        if (!err) {
+            getData(result[0]);
+        }
+    });
+};
+db.deleteCategory = function(id) {
+    var q = "DELETE FROM pharmacy.category WHERE id=?";
+    con.query(q, [id], function(err, result) {
+        if (!err) {
             console.log(result);
         }
     });
 };
 
+db.createCategory = function(data) {
+    var q =
+        "INSERT INTO pharmacy.category (name,description) VALUES (?,?)";
+    con.query(
+        q, [data.name, data.description],
+        function(err, result) {
+            if (!err) {
+                console.log(result);
+            } else {
+                console.log(err);
+            }
+        },
+    );
+};
+db.updateCategory = function(data, id) {
+    var q =
+        "UPDATE pharmacy.category SET id=?,name=?,description=? WHERE id=?";
+    con.query(
+        q, [id, data.name, data.description, id],
+        function(err, result) {
+            if (!err) {
+                console.log(result);
+            } else {
+                console.log(err);
+            }
+        },
+    );
+};
 module.exports = db;

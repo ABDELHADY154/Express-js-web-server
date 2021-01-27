@@ -78,8 +78,27 @@ app.post("/pharmacy/suppliers/editForm/:id", bodyParser, function(req, res) {
 app.get("/pharmacy/category", function(req, res) {
     controller.CategoryController(req, res);
 });
+app.get("/pharmacy/category/show/:id", function(req, res) {
+    controller.CategoryShowController(req, res);
+});
+app.get("/pharmacy/category/delete/:id", function(req, res) {
+    controller.CategoryDelete(req, res);
+});
+app.get("/pharmacy/category/create", function(req, res) {
+    controller.CreateCategory(req, res);
+});
+app.post("/pharmacy/category/createForm", bodyParser, function(req, res) {
+    controller.CreateCategoryForm(req, res);
+});
+app.get("/pharmacy/category/edit/:id", function(req, res) {
+    controller.editCategory(req, res);
+});
+app.post("/pharmacy/category/editForm/:id", bodyParser, function(req, res) {
+    controller.updateCategoryForm(req, res);
+});
 // fallback route
 app.get("*", function(req, res) {
     res.send("page not found");
 });
+
 app.listen(3000);

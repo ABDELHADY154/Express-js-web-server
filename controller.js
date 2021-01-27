@@ -258,3 +258,52 @@ exports.CategoryController = (req, res) => {
         res.redirect("/");
     }
 };
+exports.CategoryShowController = (req, res) => {
+    if (req.cookies.didlogin == "true") {
+        db.getCategory(req.params.id, function(data) {
+            res.layout("category/show", {
+                layout: "index",
+                title: 'category',
+                category: data,
+            });
+        });
+    } else {
+        res.redirect("/");
+    }
+};
+exports.CategoryDelete = (req, res) => {
+    if (req.cookies.didlogin == "true") {
+        db.deleteCategory(req.params.id);
+        res.redirect("/pharmacy/category");
+    } else {
+        res.redirect("/");
+    }
+};
+exports.CreateCategory = (req, res) => {
+    if (req.cookies.didlogin == "true") {
+        res.layout("category/create", {
+            layout: "index",
+            title: "category",
+        });
+    }
+};
+exports.CreateCategoryForm = (req, res) => {
+    db.createCategory(req.body);
+    res.redirect("/pharmacy/category");
+};
+
+exports.editCategory = (req, res) => {
+    if (req.cookies.didlogin == "true") {
+        db.getCategory(req.params.id, function(data) {
+            res.layout("category/edit", {
+                layout: "index",
+                title: 'category',
+                category: data,
+            });
+        });
+    }
+};
+exports.updateCategoryForm = (req, res) => {
+    db.updateCategory(req.body, req.params.id);
+    res.redirect("/pharmacy/category");
+};
