@@ -14,10 +14,7 @@ app.get("/", function (req, res) {
 app.get("/pharmacy", function (req, res) {
   controller.HomeController(req, res);
 });
-<<<<<<< HEAD
-=======
 // Authentication
->>>>>>> main
 app.get("/login", function (req, res) {
   controller.LoginController(req, res);
 });
@@ -29,14 +26,6 @@ app.post("/registerUser", bodyParser, function (req, res) {
 });
 app.post("/loginUser", bodyParser, function (req, res) {
   controller.LoginFormController(req, res);
-<<<<<<< HEAD
-});
-
-app.get("/logout", function (req, res) {
-  controller.logoutController(req, res);
-});
-
-=======
 });
 app.get("/logout", function (req, res) {
   controller.logoutController(req, res);
@@ -66,7 +55,6 @@ app.post("/pharmacy/users/editForm/:id", bodyParser, function (req, res) {
 });
 
 // Customers
->>>>>>> main
 app.get("/pharmacy/customers", function (req, res) {
   controller.CustomersController(req, res);
 });
@@ -89,10 +77,7 @@ app.post("/pharmacy/customers/editForm/:id", bodyParser, function (req, res) {
   controller.editCustomerForm(req, res);
 });
 
-<<<<<<< HEAD
-=======
 // suppliers
->>>>>>> main
 app.get("/pharmacy/suppliers", function (req, res) {
   controller.SupplierController(req, res);
 });
@@ -115,32 +100,8 @@ app.post("/pharmacy/suppliers/editForm/:id", bodyParser, function (req, res) {
   controller.editSupplierForm(req, res);
 });
 
-<<<<<<< HEAD
 app.get("/pharmacy/items", function (req, res) {
   controller.ItemController(req, res);
-=======
-// category
-app.get("/pharmacy/category", function (req, res) {
-  controller.CategoryController(req, res);
-});
-app.get("/pharmacy/category/show/:id", function (req, res) {
-  controller.CategoryShowController(req, res);
-});
-app.get("/pharmacy/category/delete/:id", function (req, res) {
-  controller.CategoryDelete(req, res);
-});
-app.get("/pharmacy/category/create", function (req, res) {
-  controller.CreateCategory(req, res);
-});
-app.post("/pharmacy/category/createForm", bodyParser, function (req, res) {
-  controller.CreateCategoryForm(req, res);
-});
-app.get("/pharmacy/category/edit/:id", function (req, res) {
-  controller.editCategory(req, res);
-});
-app.post("/pharmacy/category/editForm/:id", bodyParser, function (req, res) {
-  controller.updateCategoryForm(req, res);
->>>>>>> main
 });
 app.get("/pharmacy/items/show/:id", function (req, res) {
   controller.ItemShowController(req, res);
@@ -167,8 +128,4 @@ app.get("/pharmacy/items/delete/:id", function (req, res) {
 app.get("*", function (req, res) {
   res.send("page not found");
 });
-<<<<<<< HEAD
-=======
-
->>>>>>> main
 app.listen(3000);
