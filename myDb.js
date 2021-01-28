@@ -25,6 +25,12 @@ db.createDBIfNotExists = function (databaseName) {
     },
   );
   con.query(
+    "CREATE DATABASE IF NOT EXISTS " + databaseName,
+    function (err, result) {
+      if (!err) console.log("database created");
+    },
+  );
+  con.query(
     "CREATE TABLE IF NOT EXISTS pharmacy.users (id INT AUTO_INCREMENT PRIMARY KEY , full_name VARCHAR(255), email VARCHAR(255), password VARCHAR(255))",
     function (err, result) {
       if (!err) console.log("users table created");
@@ -246,47 +252,56 @@ db.UpdateSupplier = function (data, id) {
   );
 };
 
-db.getAllCategory = function (category) {
-  var q = "SELECT * FROM pharmacy.category WHERE 1";
+db.getAllItems = function (items) {
+  var q = "SELECT * FROM pharmacy.items WHERE 1";
   con.query(q, function (err, result) {
     if (!err) {
-      category(result);
-    }
-  });
-};
-db.getCategory = function (id, getData) {
-  var q = "SELECT * FROM pharmacy.category  WHERE id=?";
-  con.query(q, [id], function (err, result) {
-    if (!err) {
-      getData(result[0]);
-    }
-  });
-};
-db.deleteCategory = function (id) {
-  var q = "DELETE FROM pharmacy.category WHERE id=?";
-  con.query(q, [id], function (err, result) {
-    if (!err) {
-      console.log(result);
+      items(result);
     }
   });
 };
 
-db.createCategory = function (data) {
-  var q = "INSERT INTO pharmacy.category (name,description) VALUES (?,?)";
-  con.query(q, [data.name, data.description], function (err, result) {
+db.getItems = function (id, getData) {
+  var q = "SELECT * FROM pharmacy.items WHERE id=?";
+  con.query(q, [id], function (err, result) {
     if (!err) {
-      console.log(result);
-    } else {
-      console.log(err);
+      getData(result[0]);
+      console.log(result[0]);
     }
   });
 };
-db.updateCategory = function (data, id) {
-  var q = "UPDATE pharmacy.category SET id=?,name=?,description=? WHERE id=?";
-  con.query(q, [id, data.name, data.description, id], function (err, result) {
-    if (!err) {
-      console.log(result);
-    } else {
+
+db.createItems = function (data) {
+  var q =
+    "INSERT INTO pharmacy.items (item_name,item_price,item_quntitny) VALUES (?,?,?)";
+  con.query(
+    q,
+    [data.item_name, data.item_price, data.item_quntitny],
+    function (err, result) {
+      if (err) {
+        console.log(err);
+      }
+    },
+  );
+};
+
+db.UpdateItems = function (data, id) {
+  var q =
+    "UPDATE pharmacy.items SET id=?,item_name=?,item_price=?,item_quntitny=? WHERE id=?";
+  con.query(
+    q,
+    [id, data.item_name, data.item_price, data.item_quntitny, id],
+    function (err, result) {
+      if (!err) {
+        console.log(result);
+      }
+    },
+  );
+};
+db.deleteItems = function (id) {
+  var q = "DELETE FROM pharmacy.items WHERE id=?";
+  con.query(q, [id], function (err, result) {
+    if (err) {
       console.log(err);
     }
   });

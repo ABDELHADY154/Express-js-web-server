@@ -100,31 +100,32 @@ app.post("/pharmacy/suppliers/editForm/:id", bodyParser, function (req, res) {
   controller.editSupplierForm(req, res);
 });
 
-// category
-app.get("/pharmacy/category", function (req, res) {
-  controller.CategoryController(req, res);
+app.get("/pharmacy/items", function (req, res) {
+  controller.ItemController(req, res);
 });
-app.get("/pharmacy/category/show/:id", function (req, res) {
-  controller.CategoryShowController(req, res);
+app.get("/pharmacy/items/show/:id", function (req, res) {
+  controller.ItemShowController(req, res);
 });
-app.get("/pharmacy/category/delete/:id", function (req, res) {
-  controller.CategoryDelete(req, res);
+app.get("/pharmacy/items/create", function (req, res) {
+  controller.CreateItems(req, res);
 });
-app.get("/pharmacy/category/create", function (req, res) {
-  controller.CreateCategory(req, res);
+app.post("/pharmacy/items/createForm", bodyParser, function (req, res) {
+  controller.CreateItemsForm(req, res);
 });
-app.post("/pharmacy/category/createForm", bodyParser, function (req, res) {
-  controller.CreateCategoryForm(req, res);
+
+app.get("/pharmacy/items/edit/:id", function (req, res) {
+  controller.editItems(req, res);
 });
-app.get("/pharmacy/category/edit/:id", function (req, res) {
-  controller.editCategory(req, res);
+app.post("/pharmacy/items/editForm/:id", bodyParser, function (req, res) {
+  controller.editItemsForm(req, res);
 });
-app.post("/pharmacy/category/editForm/:id", bodyParser, function (req, res) {
-  controller.updateCategoryForm(req, res);
+
+app.get("/pharmacy/items/delete/:id", function (req, res) {
+  controller.ItemsDelete(req, res);
 });
+
 // fallback route
 app.get("*", function (req, res) {
   res.send("page not found");
 });
-
 app.listen(3000);

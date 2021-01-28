@@ -31,7 +31,6 @@ exports.HomeController = (req, res) => {
   }
 };
 
-// Authentication
 exports.LoginController = (req, res) => {
   if (req.cookies.didlogin == "true") {
     res.redirect("/");
@@ -119,72 +118,6 @@ exports.logoutController = (req, res) => {
   });
   res.redirect("/");
 };
-
-// user
-exports.UsersController = (req, res) => {
-  if (req.cookies.didlogin == "true") {
-    db.getAllUsers(function (data) {
-      res.layout("user/index", {
-        layout: "index",
-        title: "customer",
-        users: data,
-      });
-    });
-  } else {
-    res.redirect("/");
-  }
-};
-exports.UsersShowController = (req, res) => {
-  if (req.cookies.didlogin == "true") {
-    db.getUser(req.params.id, function (data) {
-      res.layout("user/show", {
-        layout: "index",
-        title: data.full_name,
-        user: data,
-      });
-    });
-  } else {
-    res.redirect("/");
-  }
-};
-exports.UserDelete = (req, res) => {
-  if (req.cookies.didlogin == "true") {
-    db.deleteUser(req.params.id);
-    res.redirect("/pharmacy/users");
-  } else {
-    res.redirect("/");
-  }
-};
-exports.createUser = (req, res) => {
-  if (req.cookies.didlogin == "true") {
-    res.layout("user/create", {
-      layout: "index",
-      title: "create",
-    });
-  }
-};
-exports.createUserForm = (req, res) => {
-  db.createUser(req.body);
-  res.redirect("/pharmacy/users");
-};
-exports.editUser = (req, res) => {
-  if (req.cookies.didlogin == "true") {
-    db.getUser(req.params.id, function (data) {
-      res.layout("user/edit", {
-        layout: "index",
-        title: data.full_name,
-        user: data,
-      });
-    });
-  }
-};
-exports.editUserForm = (req, res) => {
-  console.log(req.params.id);
-  db.updateUser(req.body, req.params.id);
-  res.redirect("/pharmacy/users");
-};
-
-// customer
 exports.CustomersController = (req, res) => {
   if (req.cookies.didlogin == "true") {
     db.getAllCustomer(function (data) {
@@ -244,11 +177,9 @@ exports.editCustomer = (req, res) => {
   }
 };
 exports.editCustomerForm = (req, res) => {
-  console.log(req.params.id);
   db.updateCustomer(req.body, req.params.id);
   res.redirect("/pharmacy/customers");
 };
-// supplier
 exports.SupplierController = (req, res) => {
   if (req.cookies.didlogin == "true") {
     db.getAllSuppliers(function (data) {
@@ -308,70 +239,70 @@ exports.editSupplier = (req, res) => {
   }
 };
 exports.editSupplierForm = (req, res) => {
-  console.log(req.params.id);
   db.UpdateSupplier(req.body, req.params.id);
   res.redirect("/pharmacy/suppliers");
 };
 
-exports.CategoryController = (req, res) => {
+exports.ItemController = (req, res) => {
   if (req.cookies.didlogin == "true") {
-    db.getAllCategory(function (data) {
-      res.layout("category/index", {
+    db.getAllItems(function (data) {
+      res.layout("items/index", {
         layout: "index",
-        title: "category",
-        category: data,
+        title: "Items",
+        items: data,
       });
     });
   } else {
     res.redirect("/");
   }
 };
-exports.CategoryShowController = (req, res) => {
+exports.ItemShowController = (req, res) => {
   if (req.cookies.didlogin == "true") {
-    db.getCategory(req.params.id, function (data) {
-      res.layout("category/show", {
+    db.getItems(req.params.id, function (data) {
+      res.layout("items/show", {
         layout: "index",
-        title: "category",
-        category: data,
+        title: "Item",
+        item: data,
       });
     });
   } else {
     res.redirect("/");
   }
 };
-exports.CategoryDelete = (req, res) => {
+exports.CreateItems = (req, res) => {
   if (req.cookies.didlogin == "true") {
-    db.deleteCategory(req.params.id);
-    res.redirect("/pharmacy/category");
-  } else {
-    res.redirect("/");
-  }
-};
-exports.CreateCategory = (req, res) => {
-  if (req.cookies.didlogin == "true") {
-    res.layout("category/create", {
+    res.layout("items/create", {
       layout: "index",
-      title: "category",
+      title: "create",
     });
   }
 };
-exports.CreateCategoryForm = (req, res) => {
-  db.createCategory(req.body);
-  res.redirect("/pharmacy/category");
+exports.CreateItemsForm = (req, res) => {
+  db.createItems(req.body);
+  res.redirect("/pharmacy/items");
 };
 
-exports.editCategory = (req, res) => {
+exports.editItems = (req, res) => {
   if (req.cookies.didlogin == "true") {
-    db.getCategory(req.params.id, function (data) {
-      res.layout("category/edit", {
+    db.getItems(req.params.id, function (data) {
+      res.layout("items/edit", {
         layout: "index",
-        title: "category",
-        category: data,
+        title: "Update",
+        items: data,
       });
     });
   }
 };
-exports.updateCategoryForm = (req, res) => {
-  db.updateCategory(req.body, req.params.id);
-  res.redirect("/pharmacy/category");
+exports.editItemsForm = (req, res) => {
+  db.UpdateItems(req.body, req.params.id);
+  res.redirect("/pharmacy/items");
+};
+
+exports.ItemsDelete = (req, res) => {
+  if (req.cookies.didlogin == "true") {
+    db.deleteItems(req.params.id);
+    res.redirect("/pharmacy/items");
+  } else {
+    res.redirect("/");
+  }
 };
