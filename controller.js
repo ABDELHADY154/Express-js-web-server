@@ -177,7 +177,6 @@ exports.editCustomer = (req, res) => {
   }
 };
 exports.editCustomerForm = (req, res) => {
-  console.log(req.params.id);
   db.updateCustomer(req.body, req.params.id);
   res.redirect("/pharmacy/customers");
 };

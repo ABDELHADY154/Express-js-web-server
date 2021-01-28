@@ -3,29 +3,46 @@
     <div class="card-header">
       <a class="btn btn-primary" href="/pharmacy/items/create">create</a>
     </div>
-    <h1>Items</h1>
+    <div class="card-body text-center">
+      <table class="table table-dark table-striped">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+            <th scope="col">Quntitny</th>
+            <th scope="col">Action</th>
 
-    <div class="card-body text-center container-fluid d-flex">
-      <% items.forEach(function(items){ %>
-
-        <div class="card col-3  mx-auto">
-          <img src="<%= items.item_url %>" class="card-img-top " style="height :300px;">
-          <div class="card-body">
-            <h5 class="card-title">
-              <%= items.item_name %>
-
-            </h5>
-            <p class="card-text"> in stock <%= items.item_quntitny %>
-            </p>
-            <a href="/pharmacy/items/show/<%= items.id %> " class="btn btn-primary">price <%= items.item_price %>
-            </a>
-            <a href="/pharmacy/items/delete/<%= items.id %> " class="btn btn-danger">Delete
-            </a>
-            <a class="btn btn-info mr-3" href="/pharmacy/items/edit/<%= items.id %> ">update</a>
-          </div>
-        </div>
-        <% }); %>
-
+          </tr>
+        </thead>
+        <tbody>
+          <% items.forEach(function(items){ %>
+            <tr>
+              <th scope="row">
+                <%= items.id %>
+              </th>
+              <td>
+                <%= items.item_name %>
+              </td>
+              <td>
+                <%= items.item_price %>
+              </td>
+              <td>
+                <%= items.item_quntitny %>
+              </td>
+              <td>
+                <div>
+                  <a href="/pharmacy/items/show/<%= items.id %> " class="btn btn-success mr-3">
+                    Show
+                  </a>
+                  <a class="btn btn-info mr-3" href="/pharmacy/items/edit/<%= items.id %> ">update</a>
+                  <a class="btn btn-danger mr-3" href="/pharmacy/items/delete/<%= items.id %> ">delete</a>
+                </div>
+              </td>
+            </tr>
+            <% }); %>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

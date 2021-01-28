@@ -41,17 +41,12 @@ db.createDBIfNotExists = function (databaseName) {
   );
 
   con.query(
-    "CREATE TABLE IF NOT EXISTS pharmacy.items (id INT AUTO_INCREMENT PRIMARY KEY ,item_name  VARCHAR(255), item_price  VARCHAR(255), item_quntitny VARCHAR(255),item_url VARCHAR(255)    )",
+    "CREATE TABLE IF NOT EXISTS pharmacy.items (id INT AUTO_INCREMENT PRIMARY KEY ,item_name  VARCHAR(255), item_price  VARCHAR(255), item_quntitny VARCHAR(255)    )",
     function (err, result) {
       if (!err) console.log("items table created");
     }
   );
-  con.query(
-    "CREATE TABLE IF NOT EXISTS pharmacy.catagory (id INT AUTO_INCREMENT PRIMARY KEY , catagory_name VARCHAR(255), catagory_description VARCHAR(255))",
-    function (err, result) {
-      if (!err) console.log("catagory table created");
-    }
-  );
+
 };
 
 db.registerUser = function (data, userData) {
@@ -196,10 +191,10 @@ db.getItems = function (id, getData) {
 
 db.createItems = function (data) {
   var q =
-    "INSERT INTO pharmacy.items (item_name,item_price,item_quntitny,item_url) VALUES (?,?,?,?)";
+    "INSERT INTO pharmacy.items (item_name,item_price,item_quntitny) VALUES (?,?,?)";
   con.query(
     q,
-    [data.item_name, data.item_price, data.item_quntitny, data.item_url],
+    [data.item_name, data.item_price, data.item_quntitny],
     function (err, result) {
       if (err) {
         console.log(err);
@@ -210,10 +205,10 @@ db.createItems = function (data) {
 
 db.UpdateItems = function (data, id) {
   var q =
-    "UPDATE pharmacy.items SET id=?,item_name=?,item_price=?,item_quntitny=?,item_url=? WHERE id=?";
+    "UPDATE pharmacy.items SET id=?,item_name=?,item_price=?,item_quntitny=? WHERE id=?";
   con.query(
     q,
-    [id, data.item_name, data.item_price, data.item_quntitny, data.item_url, id],
+    [id, data.item_name, data.item_price, data.item_quntitny, id],
     function (err, result) {
       if (!err) {
         console.log(result);
