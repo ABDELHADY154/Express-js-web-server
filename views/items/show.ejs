@@ -1,19 +1,11 @@
 <div class="container mt-5">
     <div class="card">
         <div class="card-header">
-            <a class="btn btn-primary" href="/pharmacy/items/create">create</a>
+            <a href="/pharmacy/items" class="btn btn-info">Go back</a>
         </div>
-        <h1>Items</h1>
-
-        <div class="card-body text-center container-fluid d-flex">
-
+        <div class="card-body">
             <% if (item) { %>
                 <ul>
-                    <li>
-                        <h2>ID: <%= item.id %>
-                        </h2>
-                    </li>
-
                     <li>
                         <h2>Name: <%= item.item_name %>
                         </h2>
