@@ -50,6 +50,7 @@ db.createDBIfNotExists = function (databaseName) {
   );
 };
 
+// Authentication
 db.registerUser = function (data, userData) {
   var q =
     "INSERT INTO pharmacy.users (full_name,email,password) VALUES (?,?,?)";
@@ -77,6 +78,63 @@ db.loginUser = function (data, user) {
   });
 };
 
+// users
+db.getAllUsers = function (users) {
+  var q = "SELECT * FROM pharmacy.users WHERE 1";
+  con.query(q, function (err, result) {
+    if (!err) {
+      users(result);
+    }
+  });
+};
+
+db.getUser = function (id, getData) {
+  var q = "SELECT * FROM pharmacy.users WHERE id=?";
+  con.query(q, [id], function (err, result) {
+    if (!err) {
+      getData(result[0]);
+    }
+  });
+};
+
+db.deleteUser = function (id) {
+  var q = "DELETE FROM pharmacy.users WHERE id=?";
+  con.query(q, [id], function (err, result) {
+    if (err) {
+      console.log(err);
+    }
+  });
+};
+
+db.createUser = function (data) {
+  var q =
+    "INSERT INTO pharmacy.users (full_name,email,password) VALUES (?,?,?)";
+  con.query(
+    q,
+    [data.full_name, data.email, data.password],
+    function (err, result) {
+      if (!err) {
+        console.log(result);
+      } else {
+        console.log(err);
+      }
+    },
+  );
+};
+db.updateUser = function (data, id) {
+  var q =
+    "UPDATE pharmacy.users SET id=?,full_name=?,email=?,password=? WHERE id=?";
+  con.query(
+    q,
+    [id, data.full_name, data.email, data.password, id],
+    function (err, result) {
+      if (err) {
+        console.log(err);
+      }
+    },
+  );
+};
+// customers
 db.getAllCustomer = function (customers) {
   var q = "SELECT * FROM pharmacy.customers WHERE 1";
   con.query(q, function (err, result) {

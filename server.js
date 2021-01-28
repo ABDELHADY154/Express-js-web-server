@@ -14,6 +14,7 @@ app.get("/", function (req, res) {
 app.get("/pharmacy", function (req, res) {
   controller.HomeController(req, res);
 });
+// Authentication
 app.get("/login", function (req, res) {
   controller.LoginController(req, res);
 });
@@ -26,11 +27,34 @@ app.post("/registerUser", bodyParser, function (req, res) {
 app.post("/loginUser", bodyParser, function (req, res) {
   controller.LoginFormController(req, res);
 });
-
 app.get("/logout", function (req, res) {
   controller.logoutController(req, res);
 });
 
+//Users
+app.get("/pharmacy/users", function (req, res) {
+  controller.UsersController(req, res);
+});
+app.get("/pharmacy/users/show/:id", function (req, res) {
+  controller.UsersShowController(req, res);
+});
+app.get("/pharmacy/users/delete/:id", function (req, res) {
+  controller.UserDelete(req, res);
+});
+app.get("/pharmacy/users/create", function (req, res) {
+  controller.createUser(req, res);
+});
+app.post("/pharmacy/users/createForm", bodyParser, function (req, res) {
+  controller.createUserForm(req, res);
+});
+app.get("/pharmacy/users/edit/:id", function (req, res) {
+  controller.editUser(req, res);
+});
+app.post("/pharmacy/users/editForm/:id", bodyParser, function (req, res) {
+  controller.editUserForm(req, res);
+});
+
+// Customers
 app.get("/pharmacy/customers", function (req, res) {
   controller.CustomersController(req, res);
 });
@@ -53,6 +77,7 @@ app.post("/pharmacy/customers/editForm/:id", bodyParser, function (req, res) {
   controller.editCustomerForm(req, res);
 });
 
+// suppliers
 app.get("/pharmacy/suppliers", function (req, res) {
   controller.SupplierController(req, res);
 });
@@ -75,6 +100,7 @@ app.post("/pharmacy/suppliers/editForm/:id", bodyParser, function (req, res) {
   controller.editSupplierForm(req, res);
 });
 
+// category
 app.get("/pharmacy/category", function (req, res) {
   controller.CategoryController(req, res);
 });
