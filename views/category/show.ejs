@@ -1,0 +1,22 @@
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header">
+      <a href="/pharmacy/category" class="btn btn-info">Go back</a>
+    </div>
+    <div class="card-body">
+      <% if (category) { %>
+      <ul>
+        <li>
+          <h2>ID: <%= category.id %></h2>
+        </li>
+        <li>
+          <h2>Name: <%= category.name %></h2>
+        </li>
+        <li>
+          <h2>Description: <%= category.description %></h2>
+        </li>
+      </ul>
+      <% } %>
+    </div>
+  </div>
+</div>
