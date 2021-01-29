@@ -25,12 +25,6 @@ db.createDBIfNotExists = function (databaseName) {
     },
   );
   con.query(
-    "CREATE DATABASE IF NOT EXISTS " + databaseName,
-    function (err, result) {
-      if (!err) console.log("database created");
-    },
-  );
-  con.query(
     "CREATE TABLE IF NOT EXISTS pharmacy.users (id INT AUTO_INCREMENT PRIMARY KEY , full_name VARCHAR(255), email VARCHAR(255), password VARCHAR(255))",
     function (err, result) {
       if (!err) console.log("users table created");
@@ -49,13 +43,24 @@ db.createDBIfNotExists = function (databaseName) {
     },
   );
   con.query(
+    "CREATE TABLE IF NOT EXISTS pharmacy.items (id INT AUTO_INCREMENT PRIMARY KEY ,item_name  VARCHAR(255), item_price  VARCHAR(255), item_quntitny VARCHAR(255)    )",
+    function (err, result) {
+      if (!err) console.log("items table created");
+    },
+  );
+  con.query(
     "CREATE TABLE IF NOT EXISTS pharmacy.category (id INT AUTO_INCREMENT PRIMARY KEY , name VARCHAR(255), description VARCHAR(255))",
     function (err, result) {
       if (!err) console.log("category table created");
     },
   );
+  con.query(
+    "CREATE TABLE IF NOT EXISTS pharmacy.invoices (id INT AUTO_INCREMENT PRIMARY KEY , total_price VARCHAR(255), customer_id VARCHAR(255), supplier_id VARCHAR(255), FOREIGN KEY (customer_id) REFERENCES pharmacy.customers(id), FOREIGN KEY (supplier_id) REFERENCES pharmacy.suppliers(id))",
+    function (err, result) {
+      if (!err) console.log("invoice table created");
+    },
+  );
 };
-
 // Authentication
 db.registerUser = function (data, userData) {
   var q =
@@ -75,6 +80,7 @@ db.registerUser = function (data, userData) {
     },
   );
 };
+
 db.loginUser = function (data, user) {
   var q = "SELECT * FROM pharmacy.users WHERE email=? AND password=?";
   con.query(q, [data.email, data.password], function (err, result) {
@@ -198,11 +204,11 @@ db.updateCustomer = function (data, id) {
     },
   );
 };
-db.getAllSuppliers = function (customers) {
+db.getAllSuppliers = function (suppliers) {
   var q = "SELECT * FROM pharmacy.suppliers WHERE 1";
   con.query(q, function (err, result) {
     if (!err) {
-      customers(result);
+      suppliers(result);
     }
   });
 };
@@ -302,8 +308,110 @@ db.deleteItems = function (id) {
   var q = "DELETE FROM pharmacy.items WHERE id=?";
   con.query(q, [id], function (err, result) {
     if (err) {
+    }
+  });
+};
+
+db.getAllCategory = function (category) {
+  var q = "SELECT * FROM pharmacy.category WHERE 1";
+  con.query(q, function (err, result) {
+    if (!err) {
+      category(result);
+    }
+  });
+};
+db.getCategory = function (id, getData) {
+  var q = "SELECT * FROM pharmacy.category  WHERE id=?";
+  con.query(q, [id], function (err, result) {
+    if (!err) {
+      getData(result[0]);
+    }
+  });
+};
+db.deleteCategory = function (id) {
+  var q = "DELETE FROM pharmacy.category WHERE id=?";
+  con.query(q, [id], function (err, result) {
+    if (!err) {
+      console.log(result);
+    }
+  });
+};
+
+db.createCategory = function (data) {
+  var q = "INSERT INTO pharmacy.category (name,description) VALUES (?,?)";
+  con.query(q, [data.name, data.description], function (err, result) {
+    if (!err) {
+      console.log(result);
+    } else {
       console.log(err);
     }
   });
+};
+db.updateCategory = function (data, id) {
+  var q = "UPDATE pharmacy.category SET id=?,name=?,description=? WHERE id=?";
+  con.query(q, [id, data.name, data.description, id], function (err, result) {
+    if (!err) {
+      console.log(result);
+    } else {
+      console.log(err);
+    }
+  });
+};
+
+// Invoice
+db.getAllInvoices = function (invoices) {
+  var q = "SELECT * FROM pharmacy.invoices WHERE 1";
+  con.query(q, function (err, result) {
+    if (!err) {
+      invoices(result);
+    }
+  });
+};
+db.getInvoice = function (id, getData) {
+  var q = "SELECT * FROM pharmacy.invoices  WHERE id=?";
+  con.query(q, [id], function (err, result) {
+    if (!err) {
+      getData(result[0]);
+    }
+  });
+};
+db.deleteInvoice = function (id) {
+  var q = "DELETE FROM pharmacy.invoices WHERE id=?";
+  con.query(q, [id], function (err, result) {
+    if (!err) {
+      console.log(result);
+    }
+  });
+};
+
+db.createInvoice = function (data) {
+  var q =
+    "INSERT INTO pharmacy.invoices (total_price,customer_id,supplier_id) VALUES (?,?,?)";
+  con.query(
+    q,
+    [data.total_price, data.customer_id, data.supplier_id],
+    function (err, result) {
+      if (!err) {
+        console.log(result);
+      } else {
+        console.log(err);
+      }
+    },
+  );
+};
+db.updateInvoice = function (data, id) {
+  var q =
+    "UPDATE pharmacy.invoices SET id=?,total_price=?,customer_id=?, supplier_id=? WHERE id=?";
+  con.query(
+    q,
+    [id, data.total_price, data.customer_id, data.supplier_id, id],
+    function (err, result) {
+      if (!err) {
+        console.log(result);
+      } else {
+        console.log(err);
+      }
+    },
+  );
 };
 module.exports = db;

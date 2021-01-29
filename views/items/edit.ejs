@@ -1,33 +1,50 @@
 <div class="container mt-5 w-50">
-    <div class="card">
-        <div class="card-header d-flex justify-content-center">
-            <h5 class="card-title">Add item</h5>
-        </div>
-
-        <div class="card-body">
-            <form method="POST" action="/pharmacy/items/editForm/<%= items.id %> ">
-                <div class="mb-3">
-                    <label for="item_name" class="form-label"> Name</label>
-
-                    <input type="text" class="form-control" id="item_name" name="item_name"
-                        value="<%= items.item_name %>" required />
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Price</label>
-                    <input type="number" class="form-control" id="item_price" name="item_price"
-                        value="<%= items.item_price %>" required />
-                </div>
-                <div class="mb-3">
-                    <label for="exampleInputPassword1" class="form-label">quntitny</label>
-                    <input type="number" class="form-control" id="exampleInputPassword1" name="item_quntitny"
-                        value="<%= items.item_quntitny %>" required />
-                </div>
-
-
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Update</button>
-                </div>
-            </form>
-        </div>
+  <div class="card">
+    <div class="card-header d-flex justify-content-center">
+      <h5 class="card-title">Add item</h5>
     </div>
+
+    <div class="card-body">
+      <form method="POST" action="/pharmacy/items/editForm/<%= items.id %> ">
+        <div class="mb-3">
+          <label for="item_name" class="form-label"> Name</label>
+
+          <input
+            type="text"
+            class="form-control"
+            id="item_name"
+            name="item_name"
+            value="<%= items.item_name %>"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Price</label>
+          <input
+            type="number"
+            class="form-control"
+            id="item_price"
+            name="item_price"
+            value="<%= items.item_price %>"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">quntitny</label>
+          <input
+            type="number"
+            class="form-control"
+            id="exampleInputPassword1"
+            name="item_quntitny"
+            value="<%= items.item_quntitny %>"
+            required
+          />
+        </div>
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
