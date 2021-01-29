@@ -1,0 +1,32 @@
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header">
+      <a href="/pharmacy/invoices" class="btn btn-info">Go back</a>
+    </div>
+    <div class="card-body">
+      <% if (invoice) { %>
+      <ul>
+        <li><h2>Total Price: <%= invoice.total_price %></h2></li>
+        <li>
+          <h2>
+            <a
+              href="/pharmacy/customers/show/<%= invoice.customer_id %> "
+              class="btn btn-primary"
+              >View Customer</a
+            >
+          </h2>
+        </li>
+        <li>
+          <h2>
+            <a
+              href="/pharmacy/suppliers/show/<%= invoice.supplier_id %> "
+              class="btn btn-primary"
+              >View Supplier</a
+            >
+          </h2>
+        </li>
+      </ul>
+      <% } %>
+    </div>
+  </div>
+</div>

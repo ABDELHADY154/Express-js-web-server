@@ -12,8 +12,14 @@
         <div class="mb-3">
           <label for="fullName" class="form-label">name</label>
 
-          <input type="text" class="form-control" id="fullName" name="full_name"
-          value="<%= customer.full_name %> " / >
+          <input
+            type="text"
+            class="form-control"
+            id="fullName"
+            name="full_name"
+            value="<%= customer.full_name %> "
+            required
+          />
         </div>
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label"
@@ -24,7 +30,8 @@
             class="form-control"
             id="exampleInputEmail1"
             name="email"
-            value="<%= customer.email  %> "
+            value="<%= customer.email %> "
+            required
           />
         </div>
         <div class="mb-3">
@@ -35,6 +42,7 @@
             id="exampleInputPassword1"
             name="phone_num"
             value="<%= customer.phone_num  %>"
+            required
           />
         </div>
 

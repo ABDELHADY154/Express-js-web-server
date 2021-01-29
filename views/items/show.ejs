@@ -1,0 +1,25 @@
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header">
+            <a href="/pharmacy/items" class="btn btn-info">Go back</a>
+        </div>
+        <div class="card-body">
+            <% if (item) { %>
+                <ul>
+                    <li>
+                        <h2>Name: <%= item.item_name %>
+                        </h2>
+                    </li>
+                    <li>
+                        <h2>Price: <%= item.item_price %>
+                        </h2>
+                    </li>
+                    <li>
+                        <h2>Quntitny: <%= item.item_quntitny %>
+                        </h2>
+                    </li>
+                </ul>
+                <% } %>
+        </div>
+    </div>
+</div>

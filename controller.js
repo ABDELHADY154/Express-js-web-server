@@ -119,14 +119,13 @@ exports.logoutController = (req, res) => {
   });
   res.redirect("/");
 };
-
-// user
+// users
 exports.UsersController = (req, res) => {
   if (req.cookies.didlogin == "true") {
     db.getAllUsers(function (data) {
       res.layout("user/index", {
         layout: "index",
-        title: "customer",
+        title: "users",
         users: data,
       });
     });
@@ -167,6 +166,7 @@ exports.createUserForm = (req, res) => {
   db.createUser(req.body);
   res.redirect("/pharmacy/users");
 };
+
 exports.editUser = (req, res) => {
   if (req.cookies.didlogin == "true") {
     db.getUser(req.params.id, function (data) {
@@ -179,12 +179,11 @@ exports.editUser = (req, res) => {
   }
 };
 exports.editUserForm = (req, res) => {
-  console.log(req.params.id);
   db.updateUser(req.body, req.params.id);
   res.redirect("/pharmacy/users");
 };
 
-// customer
+// customers
 exports.CustomersController = (req, res) => {
   if (req.cookies.didlogin == "true") {
     db.getAllCustomer(function (data) {
@@ -244,11 +243,11 @@ exports.editCustomer = (req, res) => {
   }
 };
 exports.editCustomerForm = (req, res) => {
-  console.log(req.params.id);
   db.updateCustomer(req.body, req.params.id);
   res.redirect("/pharmacy/customers");
 };
-// supplier
+
+// Supplier
 exports.SupplierController = (req, res) => {
   if (req.cookies.didlogin == "true") {
     db.getAllSuppliers(function (data) {
@@ -308,11 +307,76 @@ exports.editSupplier = (req, res) => {
   }
 };
 exports.editSupplierForm = (req, res) => {
-  console.log(req.params.id);
   db.UpdateSupplier(req.body, req.params.id);
   res.redirect("/pharmacy/suppliers");
 };
 
+// ITEMS
+exports.ItemController = (req, res) => {
+  if (req.cookies.didlogin == "true") {
+    db.getAllItems(function (data) {
+      res.layout("items/index", {
+        layout: "index",
+        title: "Items",
+        items: data,
+      });
+    });
+  } else {
+    res.redirect("/");
+  }
+};
+exports.ItemShowController = (req, res) => {
+  if (req.cookies.didlogin == "true") {
+    db.getItems(req.params.id, function (data) {
+      res.layout("items/show", {
+        layout: "index",
+        title: "Item",
+        item: data,
+      });
+    });
+  } else {
+    res.redirect("/");
+  }
+};
+exports.CreateItems = (req, res) => {
+  if (req.cookies.didlogin == "true") {
+    res.layout("items/create", {
+      layout: "index",
+      title: "create",
+    });
+  }
+};
+exports.CreateItemsForm = (req, res) => {
+  db.createItems(req.body);
+  res.redirect("/pharmacy/items");
+};
+
+exports.editItems = (req, res) => {
+  if (req.cookies.didlogin == "true") {
+    db.getItems(req.params.id, function (data) {
+      res.layout("items/edit", {
+        layout: "index",
+        title: "Update",
+        items: data,
+      });
+    });
+  }
+};
+exports.editItemsForm = (req, res) => {
+  db.UpdateItems(req.body, req.params.id);
+  res.redirect("/pharmacy/items");
+};
+
+exports.ItemsDelete = (req, res) => {
+  if (req.cookies.didlogin == "true") {
+    db.deleteItems(req.params.id);
+    res.redirect("/pharmacy/items");
+  } else {
+    res.redirect("/");
+  }
+};
+
+// Category
 exports.CategoryController = (req, res) => {
   if (req.cookies.didlogin == "true") {
     db.getAllCategory(function (data) {
@@ -331,7 +395,7 @@ exports.CategoryShowController = (req, res) => {
     db.getCategory(req.params.id, function (data) {
       res.layout("category/show", {
         layout: "index",
-        title: "category",
+        title: data.full_name,
         category: data,
       });
     });
@@ -365,7 +429,7 @@ exports.editCategory = (req, res) => {
     db.getCategory(req.params.id, function (data) {
       res.layout("category/edit", {
         layout: "index",
-        title: "category",
+        title: data.full_name,
         category: data,
       });
     });
@@ -374,4 +438,80 @@ exports.editCategory = (req, res) => {
 exports.updateCategoryForm = (req, res) => {
   db.updateCategory(req.body, req.params.id);
   res.redirect("/pharmacy/category");
+};
+
+// Invoices
+exports.InvoiceController = (req, res) => {
+  if (req.cookies.didlogin == "true") {
+    db.getAllInvoices(function (data) {
+      res.layout("invoice/index", {
+        layout: "index",
+        title: "invoices",
+        invoices: data,
+      });
+    });
+  } else {
+    res.redirect("/");
+  }
+};
+exports.InvoiceShowController = (req, res) => {
+  if (req.cookies.didlogin == "true") {
+    db.getInvoice(req.params.id, function (data) {
+      res.layout("invoice/show", {
+        layout: "index",
+        title: "invoice",
+        invoice: data,
+      });
+    });
+  } else {
+    res.redirect("/");
+  }
+};
+exports.InvoiceDelete = (req, res) => {
+  if (req.cookies.didlogin == "true") {
+    db.deleteInvoice(req.params.id);
+    res.redirect("/pharmacy/invoices");
+  } else {
+    res.redirect("/");
+  }
+};
+exports.CreateInvoice = (req, res) => {
+  if (req.cookies.didlogin == "true") {
+    db.getAllCustomer(function (result) {
+      db.getAllSuppliers(function (supp) {
+        res.layout("invoice/create", {
+          layout: "index",
+          title: "create",
+          customers: result,
+          suppliers: supp,
+        });
+      });
+    });
+  }
+};
+exports.createInvoiceForm = (req, res) => {
+  db.createInvoice(req.body);
+  res.redirect("/pharmacy/invoices");
+};
+
+exports.editInvoice = (req, res) => {
+  if (req.cookies.didlogin == "true") {
+    db.getInvoice(req.params.id, function (invoiceData) {
+      db.getAllCustomer(function (result) {
+        db.getAllSuppliers(function (supp) {
+          res.layout("invoice/edit", {
+            layout: "index",
+            title: "invoice",
+            invoice: invoiceData,
+            customers: result,
+            suppliers: supp,
+          });
+        });
+      });
+    });
+  }
+};
+exports.updateInvoiceForm = (req, res) => {
+  db.updateInvoice(req.body, req.params.id);
+  res.redirect("/pharmacy/invoices");
 };

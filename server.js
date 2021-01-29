@@ -122,6 +122,57 @@ app.get("/pharmacy/category/edit/:id", function (req, res) {
 app.post("/pharmacy/category/editForm/:id", bodyParser, function (req, res) {
   controller.updateCategoryForm(req, res);
 });
+
+// items
+app.get("/pharmacy/items", function (req, res) {
+  controller.ItemController(req, res);
+});
+app.get("/pharmacy/items/show/:id", function (req, res) {
+  controller.ItemShowController(req, res);
+});
+app.get("/pharmacy/items/create", function (req, res) {
+  controller.CreateItems(req, res);
+});
+app.post("/pharmacy/items/createForm", bodyParser, function (req, res) {
+  controller.CreateItemsForm(req, res);
+});
+
+app.get("/pharmacy/items/edit/:id", function (req, res) {
+  controller.editItems(req, res);
+});
+app.post("/pharmacy/items/editForm/:id", bodyParser, function (req, res) {
+  controller.editItemsForm(req, res);
+});
+
+app.get("/pharmacy/items/delete/:id", function (req, res) {
+  controller.ItemsDelete(req, res);
+});
+
+// Invoices
+app.get("/pharmacy/invoices", function (req, res) {
+  controller.InvoiceController(req, res);
+});
+app.get("/pharmacy/invoices/show/:id", function (req, res) {
+  controller.InvoiceShowController(req, res);
+});
+app.get("/pharmacy/invoices/create", function (req, res) {
+  controller.CreateInvoice(req, res);
+});
+app.post("/pharmacy/invoices/createForm", bodyParser, function (req, res) {
+  controller.createInvoiceForm(req, res);
+});
+
+app.get("/pharmacy/invoices/edit/:id", function (req, res) {
+  controller.editInvoice(req, res);
+});
+app.post("/pharmacy/invoices/editForm/:id", bodyParser, function (req, res) {
+  controller.updateInvoiceForm(req, res);
+});
+
+app.get("/pharmacy/invoices/delete/:id", function (req, res) {
+  controller.InvoiceDelete(req, res);
+});
+
 // fallback route
 app.get("*", function (req, res) {
   res.send("page not found");
