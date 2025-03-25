@@ -21,9 +21,10 @@
     "cookie-parser": "^1.4.5",
     "ejs": "^3.1.5",
     "ejs-yield": "^1.0.0",
-    "express": "^4.17.1",
+    "express": "^4.21.2",
     "fs": "0.0.1-security",
     "mysql": "^2.18.1",
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "serverless-http": "^3.2.0"
   }
 }
