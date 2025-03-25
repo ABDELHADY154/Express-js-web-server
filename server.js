@@ -55,9 +55,12 @@ app.post("/pharmacy/users/editForm/:id", bodyParser, function (req, res) {
 });
 
 // Customers
-app.get("/pharmacy/customers", function (req, res) {
-  controller.CustomersController(req, res);
-});
+module.exports = getCustomers = app.get(
+  "/pharmacy/customers",
+  function (req, res) {
+    controller.CustomersController(req, res);
+  },
+);
 app.get("/pharmacy/customers/show/:id", function (req, res) {
   controller.CustomersShowController(req, res);
 });
